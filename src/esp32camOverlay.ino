@@ -50,7 +50,7 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-// My esp32cam seem so need some delay after camera init and first photo to get acceptable pictures
+// My esp32cam seems to need some delay after camera init and first photo to get acceptable pictures
 #define ESPCAMSTARTUPTIME_MS 1500
 
 // Draw ellipse on framebuffer (Code based on https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
