@@ -247,6 +247,7 @@ void takePhoto() {
   time_t now;
   #define MAXSTRDATALENGTH 80
   char strData[MAXSTRDATALENGTH+1];
+  bool converted = false;
 
   Serial.println("Take photo");
  
@@ -294,11 +295,11 @@ void takePhoto() {
   }
 
   Serial.println("Convert camera jpg buffer to rgb888 buffer");
-  bool rgb888_converted = fmt2rgb888(fb->buf, fb->len, fb->format, rgb888Buffer);
+  converted = fmt2rgb888(fb->buf, fb->len, fb->format, rgb888Buffer);
   esp_camera_fb_return(fb);
 
-  if (!rgb888_converted) {
-    Serial.println("fmt2rgb888 malloc failed");      
+  if (!converted) {
+    Serial.println("fmt2rgb888 failed");      
     free(rgb888Buffer);
     return;
   }
@@ -338,7 +339,6 @@ void takePhoto() {
   Serial.println("Convert rgb888 buffer to JPG");
   
   byte outputQuality = 90;
-  bool converted = false;
   do { // Convert framebuffer to jpg and repeat this with lowered quality, if size is too big for fmt2jpg
     converted = fmt2jpg(rgb888Buffer, rfb888.width*rfb888.height* rfb888.bytes_per_pixel, rfb888.width, rfb888.height, PIXFORMAT_RGB888, outputQuality, &outputBuffer, &outputLength);
     // fmt2jpg mallocs outputBuffer itself. Dont forget to free it
@@ -386,7 +386,7 @@ void takePhoto() {
     Serial.println("Conversion to JPG failed");
   }
 
-  // free jpg buffer, because not needed any longer
+  // free output buffer
   free(outputBuffer);
 }
 
