@@ -299,7 +299,7 @@ void takePhoto() {
   esp_camera_fb_return(fb);
 
   if (!converted) {
-    Serial.println("fmt2rgb888 failed");      
+    Serial.println("Conversion to rgb888 failed");      
     free(rgb888Buffer);
     return;
   }
