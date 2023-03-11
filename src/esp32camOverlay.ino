@@ -4,7 +4,7 @@
  * 
  * This could be useful for example, if want to show a timestamp, logo oder label on a photo.
  * Due memory limitations no resolution higher then XGA (1024x768) is possible with 4 MB psram 
- * If you get incomplete jpg images reduce jpg quality
+ * If you get incomplete jpg images reduce the jpg quality.
  * 
  * License: CC0
  * 
